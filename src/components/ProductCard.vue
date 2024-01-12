@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { useCartStore } from '@/stores/cart'
+import { defineProps } from 'vue'
+defineProps(['product'])
+
+const cartStore = useCartStore()
+</script>
+
 <template>
   <div class="card card-compact bg-base-100 shadow-xl m-1 md:m-3">
     <div class="flex justify-center items-center w-auto">
@@ -11,13 +19,11 @@
 
       <div class="card-actions justify-between items-center mt-5">
         <div class="text-indigo-700 font-bold">R$ {{ product?.price }}</div>
-        <button class="btn btn-primary btn-xs">Add to Cart</button>
+        <button class="btn btn-primary btn-xs" @click="cartStore.addCart(product)">
+          Add to Cart
+        </button>
+        <!--funçaõ dentro do objeto-->
       </div>
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from 'vue'
-defineProps(['product'])
-</script>
