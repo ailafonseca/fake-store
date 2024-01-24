@@ -10,7 +10,7 @@ export const useCartStore = defineStore('cart', {
       this.cart.push(product)
     },
 
-    removeProduct(i) {
+    removeItem(i) {
       this.cart.splice(i, 1)
     }
   }
