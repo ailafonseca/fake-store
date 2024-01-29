@@ -12,6 +12,9 @@ export const useCartStore = defineStore('cart', {
 
     removeItem(i) {
       this.cart.splice(i, 1)
+    },
+    clearCart() {
+      this.cart.length = 0
     }
   }
 })

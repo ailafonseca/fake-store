@@ -7,7 +7,7 @@ export const usePurchaseStore = defineStore('purchase', {
 
   actions: {
     finishOrder(products) {
-      this.purchases.push(products)
+      this.purchases.push([...products])
     }
   }
 })

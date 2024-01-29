@@ -2,14 +2,20 @@
 import { XCircleIcon } from '@heroicons/vue/24/solid'
 import { useCartStore } from '@/stores/cart'
 import { defineProps } from 'vue'
-defineProps(['cartProduct'])
+defineProps(['cartProduct', 'i'])
 const cartStore = useCartStore()
 </script>
 
 <template>
   <div class="card card-compact bg-base-100 shadow-xl m-1 md:m-3">
     <div class="grid justify-items-end">
-      <button @click="cartStore.removeItem(i)">
+      <button
+        @click="
+          () => {
+            cartStore.removeItem(i)
+          }
+        "
+      >
         <XCircleIcon class="w-7 text-red-700" />
       </button>
     </div>

@@ -7,19 +7,18 @@ import { RouterLink } from 'vue-router'
   <div
     class="font-mono text-purple-900 bg-purple-300 p-2 md:flex items-center md:justify-between grid grid-cols-2"
   >
-    <div class="md:flex items-center">
+    <div class="flex items-center justify-center">
       <img src="/./src/assets/store-shopping-ecommerce-svgrepo-com.svg" class="h-14 w-14" />
       <div class="md:text-2xl text-xl">Store</div>
     </div>
-    <div class="md:flex items-center">
-      <label for="cart" class="drawer-button btn">
+    <div class="flex items-center justify-center">
+      <div class="md:grid-flow-col grid grid-cols-1 md:text-base md:ml-4 md:space-x-4 mt-3">
+        <RouterLink to="/">Products</RouterLink>
+        <RouterLink to="/purchases">Purchases</RouterLink>
+      </div>
+      <label for="cart" class="drawer-button btn ml-3">
         <ShoppingCartIcon class="w-5" />
       </label>
-      <div class="md:text-base md:space-x-4 text-sm md:ml-4 space-x-1 mt-3">
-        <RouterLink to="/purchases">Purchases</RouterLink>
-
-        <RouterLink to="/">Products</RouterLink>
-      </div>
     </div>
   </div>
 </template>

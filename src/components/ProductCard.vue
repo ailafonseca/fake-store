@@ -7,7 +7,7 @@ const cartStore = useCartStore()
 </script>
 
 <template>
-  <div class="card card-compact bg-base-100 shadow-xl m-1 md:m-3">
+  <div class="card card-compact bg-base-100 shadow-xl m-1 md:m-3 w-auto">
     <div class="flex justify-center items-center w-auto">
       <img :src="product?.image" class="md:w-28 md:h-32 md:m-3 w-18 h-32 m-2" />
     </div>
