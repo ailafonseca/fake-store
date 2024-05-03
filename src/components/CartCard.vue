@@ -29,6 +29,7 @@ const cartStore = useCartStore()
 
       <div class="card-actions justify-between items-center mt-5">
         <div class="text-indigo-700 font-bold">R$ {{ cartProduct?.price }}</div>
+        <div>Qty: {{ cartStore.quantity }}</div>
       </div>
     </div>
   </div>
