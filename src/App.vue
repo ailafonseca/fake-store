@@ -27,16 +27,13 @@ const cartStore = useCartStore() // o retorno de useCart é atribuido a cartStor
         <div class="mt-4"><ShoppingCart /></div>
         <div
           v-if="cartStore.cart.length > 0"
-          class="p-2 flex items-center text-sm justify-between md:text-base sticky bottom-0"
+          class="p-2 flex items-center text-sm justify-between md:text-base sticky bottom-0 bg-base-200"
         >
-          <div class="font-bold bg-base-200">Total: R$ {{ cartStore.totalAmount.toFixed(2) }}</div>
-          <button class="btn btn-primary btn-xs md:btn-sm" @click="cartStore.cancelOrder">X</button>
-          <button
-            class="btn btn-primary btn-xs md:btn-sm"
-            @click="cartStore.finishOrder(cartStore.cart)"
-          >
+          <div class="font-bold text-sm">Total: R$ {{ cartStore.totalAmount.toFixed(2) }}</div>
+          <button class="btn btn-primary btn-xs" @click="cartStore.finishOrder(cartStore.cart)">
             Finish Order
           </button>
+          <button class="btn btn-error btn-circle btn-xs" @click="cartStore.cancelOrder">X</button>
         </div>
         <div
           v-if="

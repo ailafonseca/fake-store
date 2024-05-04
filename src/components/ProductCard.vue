@@ -18,7 +18,14 @@ const cartStore = useCartStore()
 
       <div class="card-actions justify-between items-center mt-5">
         <div class="text-indigo-700 font-bold">R$ {{ product?.price.toFixed(2) }}</div>
-        <button class="btn btn-primary btn-xs" @click="cartStore.addCart(product)">
+        <button
+          class="btn btn-primary btn-xs"
+          @click="
+            () => {
+              cartStore.addCart(product)
+            }
+          "
+        >
           Add to Cart
         </button>
       </div>
