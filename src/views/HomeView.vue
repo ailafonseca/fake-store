@@ -21,7 +21,7 @@ const filteredProducts = computed(() => {
     return products.value
   } else {
     return products.value.filter((product) =>
-      product.title.toLowerCase().startsWith(searchText.value.toLowerCase())
+      product.title.toLowerCase().includes(searchText.value.toLowerCase())
     )
   }
 })

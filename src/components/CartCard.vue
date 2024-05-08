@@ -2,7 +2,7 @@
 import { XCircleIcon } from '@heroicons/vue/24/solid'
 import { useCartStore } from '@/stores/cart'
 import { defineProps } from 'vue'
-defineProps(['cartProduct', 'i'])
+defineProps(['cartProduct', 'product', 'i'])
 const cartStore = useCartStore()
 </script>
 
@@ -12,7 +12,7 @@ const cartStore = useCartStore()
       <button
         @click="
           () => {
-            cartStore.removeItem(i)
+            cartStore.removeItem(cartProduct, i)
           }
         "
       >

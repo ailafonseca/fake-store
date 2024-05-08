@@ -19,13 +19,16 @@ export const useCartStore = defineStore('cart', {
       } else {
         product.quantity++
       }
-
       this.calculateTotalAmount()
       this.calculateTotalProductsQuantity()
     },
 
-    removeItem(i) {
-      this.cart.splice(i, 1)
+    removeItem(product, i) {
+      if (product.quantity > 1) {
+        product.quantity--
+      } else {
+        this.cart.splice(i, 1)
+      }
       this.calculateTotalAmount()
       this.calculateTotalProductsQuantity()
     },
