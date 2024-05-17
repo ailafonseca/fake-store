@@ -12,48 +12,58 @@ export const useCartStore = defineStore('cart', {
 
   actions: {
     addCart(product) {
-      if (product.quantity === undefined) {
-        this.cart.push(product)
-        product.quantity = 1
-        this.calculateTotalAmount()
+      const productCopy = { ...product }
+      const productAddedToCart = this.cart.find((item) => item.id === productCopy.id)
+
+      if (!productAddedToCart) {
+        productCopy.quantity = 1
+        this.cart.push(productCopy)
       } else {
-        product.quantity++
+        productAddedToCart.quantity++
+      }
+
+      this.calculateTotalAmount()
+      this.calculateTotalProductsQuantity()
+    },
+
+    removeItem(product) {
+      const productAddedToCart = this.cart.find((item) => item.id === product.id)
+      const index = this.cart.findIndex((item) => item.id === product.id)
+
+      if (productAddedToCart.quantity > 1) {
+        productAddedToCart.quantity--
+      } else {
+        this.cart.splice(index, 1)
       }
       this.calculateTotalAmount()
       this.calculateTotalProductsQuantity()
     },
 
-    removeItem(product, i) {
-      if (product.quantity > 1) {
-        product.quantity--
-      } else {
-        this.cart.splice(i, 1)
-      }
-      this.calculateTotalAmount()
-      this.calculateTotalProductsQuantity()
-    },
-    finishOrder(product) {
-      this.purchases.push(product)
+    finishOrder() {
+      this.purchases.push([...this.cart])
       this.finishTriggered = true
       this.cancelTriggered = false
       this.cart = []
-      product.quantity = 0
+      console.log('este é o carrinho:', this.cart)
       this.totalProductsQuantity = 0
 
       this.calculateTotalAmount()
     },
+
     cancelOrder() {
       this.cart = []
       this.cancelTriggered = true
       this.finishTriggered = false
       this.totalProductsQuantity = 0
     },
+
     calculateTotalAmount() {
       this.totalAmount = this.cart.reduce(
         (acc, product) => acc + product.price * product.quantity,
         0
       )
     },
+
     calculateTotalProductsQuantity() {
       this.totalProductsQuantity = this.cart.reduce((total, product) => total + product.quantity, 0)
     }

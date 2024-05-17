@@ -31,15 +31,18 @@ const cartMessage = computed(() => {
     <div class="drawer-side z-30">
       <label for="cart" aria-label="close sidebar" class="drawer-overlay"></label>
       <div
-        class="menu p-0 w-80 min-h-full max-h-full overflow-y-auto bg-base-200 text-base-content grid grid-cols-1"
+        class="menu p-0 w-80 min-h-full max-h-full overflow-y-auto bg-base-200 text-base-content flex-nowrap"
       >
         <label for="cart" class="drawer-button btn absolute right-0">
           <XMarkIcon class="w-7" />
         </label>
         <div class="mt-8 p-2"><ShoppingCart /></div>
+        <div class="text-xl text-center font-bold">
+          {{ cartMessage }}
+        </div>
         <div
           v-if="cartStore.cart.length > 0"
-          class="flex items-end text-sm justify-between md:text-base sticky bottom-0 bg-red-700 p-2"
+          class="flex items-end text-sm justify-between md:text-base sticky bottom-0 bg-base-200 p-2 mt-auto"
         >
           <div class="font-bold text-sm">Total: R$ {{ cartStore.totalAmount.toFixed(2) }}</div>
           <button class="btn btn-primary btn-xs" @click="cartStore.finishOrder(cartStore.cart)">
@@ -47,7 +50,6 @@ const cartMessage = computed(() => {
           </button>
           <button class="btn btn-error btn-circle btn-xs" @click="cartStore.cancelOrder">X</button>
         </div>
-        <div class="text-xl text-center font-bold">{{ cartMessage }}</div>
       </div>
     </div>
   </div>
