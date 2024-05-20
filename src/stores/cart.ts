@@ -4,10 +4,8 @@ export const useCartStore = defineStore('cart', {
   state: () => ({
     cart: [],
     purchases: [],
-    totalAmount: 0,
-    totalProductsQuantity: 0,
-    finishTriggered: false,
-    cancelTriggered: false
+    isDrawerOpen: false,
+    status: 'empty'
   }),
 
   actions: {
@@ -21,9 +19,6 @@ export const useCartStore = defineStore('cart', {
       } else {
         productAddedToCart.quantity++
       }
-
-      this.calculateTotalAmount()
-      this.calculateTotalProductsQuantity()
     },
 
     removeItem(product) {
@@ -35,37 +30,31 @@ export const useCartStore = defineStore('cart', {
       } else {
         this.cart.splice(index, 1)
       }
-      this.calculateTotalAmount()
-      this.calculateTotalProductsQuantity()
     },
 
     finishOrder() {
       this.purchases.push([...this.cart])
-      this.finishTriggered = true
-      this.cancelTriggered = false
       this.cart = []
-      console.log('este é o carrinho:', this.cart)
-      this.totalProductsQuantity = 0
-
-      this.calculateTotalAmount()
+      this.status = 'finish'
     },
 
     cancelOrder() {
       this.cart = []
-      this.cancelTriggered = true
-      this.finishTriggered = false
-      this.totalProductsQuantity = 0
+      this.status = 'cancel'
     },
 
-    calculateTotalAmount() {
-      this.totalAmount = this.cart.reduce(
-        (acc, product) => acc + product.price * product.quantity,
-        0
-      )
-    },
+    drawerToggle() {
+      this.isDrawerOpen = !this.isDrawerOpen
+      this.status = 'empty'
+    }
+  },
 
-    calculateTotalProductsQuantity() {
-      this.totalProductsQuantity = this.cart.reduce((total, product) => total + product.quantity, 0)
+  getters: {
+    calculateTotalAmount(state) {
+      return state.cart.reduce((acc, product) => acc + product.price * product.quantity, 0)
+    },
+    calculateTotalProductsQuantity(state) {
+      return state.cart.reduce((total, product) => total + product.quantity, 0)
     }
   }
 })

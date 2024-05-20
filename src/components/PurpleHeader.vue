@@ -21,7 +21,7 @@ const cartStore = useCartStore()
       <label for="cart" class="drawer-button btn btn-ghost btn-xs w-8 p-0">
         <ShoppingCartIcon class="w-6" />
         <div class="badge badge-ghost md:badge-sm badge-xs relative -top-9 -right-3">
-          {{ cartStore.totalProductsQuantity }}
+          {{ cartStore.calculateTotalProductsQuantity }}
         </div>
       </label>
     </div>

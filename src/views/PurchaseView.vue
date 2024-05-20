@@ -20,6 +20,7 @@ const cartStore = useCartStore()
             <p class="text-indigo-700 font-bold">
               R${{ purchaseProduct?.price.toFixed(2) }} x {{ purchaseProduct?.quantity }} =
               {{ purchaseProduct?.price.toFixed(2) * purchaseProduct?.quantity }}
+              <!--funcao para moedas - ajeitar 4-->
             </p>
           </div>
         </div>

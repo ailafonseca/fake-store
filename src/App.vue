@@ -9,20 +9,22 @@ const cartStore = useCartStore() // o retorno de useCart é atribuido a cartStor
 
 const cartMessage = computed(() => {
   if (cartStore.cart.length === 0) {
-    if (cartStore.finishTriggered === false && cartStore.cancelTriggered === false) {
+    if (cartStore.status === 'empty') {
       return 'The cart is empty!'
-    } else if (cartStore.cancelTriggered === true) {
+    } else if (cartStore.status === 'cancel') {
       return 'Your order was canceled!'
-    } else if (cartStore.finishTriggered === true) {
+    } else if (cartStore.status === 'finish') {
       return 'Purchase made!'
     }
   }
+
+  return null
 })
 </script>
 
 <template>
   <div class="drawer drawer-start h-screen">
-    <input id="cart" type="checkbox" class="drawer-toggle" />
+    <input id="cart" type="checkbox" class="drawer-toggle" v-model="cartStore.isDrawerOpen" />
     <div class="drawer-content">
       <PurpleHeader class="fixed top-0 right-0 left-0 z-20" />
 
@@ -33,7 +35,11 @@ const cartMessage = computed(() => {
       <div
         class="menu p-0 w-80 min-h-full max-h-full overflow-y-auto bg-base-200 text-base-content flex-nowrap"
       >
-        <label for="cart" class="drawer-button btn absolute right-0">
+        <label
+          for="cart"
+          class="drawer-button btn absolute right-0"
+          @click="cartStore.drawerToggle"
+        >
           <XMarkIcon class="w-7" />
         </label>
         <div class="mt-8 p-2"><ShoppingCart /></div>
@@ -44,7 +50,9 @@ const cartMessage = computed(() => {
           v-if="cartStore.cart.length > 0"
           class="flex items-end text-sm justify-between md:text-base sticky bottom-0 bg-base-200 p-2 mt-auto"
         >
-          <div class="font-bold text-sm">Total: R$ {{ cartStore.totalAmount.toFixed(2) }}</div>
+          <div class="font-bold text-sm">
+            Total: R$ {{ cartStore.calculateTotalAmount.toFixed(2) }}
+          </div>
           <button class="btn btn-primary btn-xs" @click="cartStore.finishOrder(cartStore.cart)">
             Finish Order
           </button>
