@@ -17,7 +17,7 @@ const cartStore = useCartStore()
       <div class="text-indigo-950 line-clamp-2 md:line-clamp-3">{{ product?.description }}</div>
 
       <div class="card-actions justify-between items-center mt-5">
-        <div class="text-indigo-700 font-bold">R$ {{ product?.price.toFixed(2) }}</div>
+        <div class="text-indigo-700 font-bold">{{ cartStore.formatPrice(product?.price) }}</div>
         <button
           class="btn btn-primary btn-xs"
           @click="

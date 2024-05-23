@@ -28,7 +28,9 @@ const cartStore = useCartStore()
       </div>
 
       <div class="card-actions justify-between items-center mt-5">
-        <div class="text-indigo-700 font-bold">R$ {{ cartProduct?.price }}</div>
+        <div class="text-indigo-700 font-bold">
+          {{ cartStore.formatPrice(cartProduct?.price) }}
+        </div>
         <div>Qty: {{ cartProduct?.quantity }}</div>
       </div>
     </div>

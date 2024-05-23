@@ -51,7 +51,7 @@ const cartMessage = computed(() => {
           class="flex items-end text-sm justify-between md:text-base sticky bottom-0 bg-base-200 p-2 mt-auto"
         >
           <div class="font-bold text-sm">
-            Total: R$ {{ cartStore.calculateTotalAmount.toFixed(2) }}
+            Total: {{ cartStore.formatPrice(cartStore.calculateTotalAmount) }}
           </div>
           <button class="btn btn-primary btn-xs" @click="cartStore.finishOrder(cartStore.cart)">
             Finish Order

@@ -33,7 +33,7 @@ export const useCartStore = defineStore('cart', {
     },
 
     finishOrder() {
-      this.purchases.push([...this.cart])
+      this.purchases.push(this.cart)
       this.cart = []
       this.status = 'finish'
     },
@@ -46,6 +46,9 @@ export const useCartStore = defineStore('cart', {
     drawerToggle() {
       this.isDrawerOpen = !this.isDrawerOpen
       this.status = 'empty'
+    },
+    formatPrice(price) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price)
     }
   },
 
