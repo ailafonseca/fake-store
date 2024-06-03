@@ -12,7 +12,7 @@ const cartStore = useCartStore()
       <button
         @click="
           () => {
-            cartStore.removeItem(cartProduct, i)
+            cartStore.removeItem(cartProduct)
           }
         "
       >

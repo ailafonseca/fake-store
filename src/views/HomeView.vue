@@ -3,8 +3,9 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import ProductCard from '@/components/ProductCard.vue'
 import { ref, computed } from 'vue'
 import axios from 'axios'
+import type { Product } from '@/models'
 
-const products = ref([])
+const products = ref<Product[]>([])
 const searchText = ref('')
 
 axios

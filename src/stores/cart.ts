@@ -1,15 +1,16 @@
 import { defineStore } from 'pinia'
+import type { Product, Purchase } from '@/models'
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    cart: [],
-    purchases: [],
+    cart: [] as Product[],
+    purchases: [] as Purchase[][],
     isDrawerOpen: false,
     status: 'empty'
   }),
 
   actions: {
-    addCart(product) {
+    addCart(product: Product) {
       const productCopy = { ...product }
       const productAddedToCart = this.cart.find((item) => item.id === productCopy.id)
 
@@ -21,10 +22,10 @@ export const useCartStore = defineStore('cart', {
       }
     },
 
-    removeItem(product) {
+    removeItem(product: Product) {
       const productAddedToCart = this.cart.find((item) => item.id === product.id)
       const index = this.cart.findIndex((item) => item.id === product.id)
-
+      if (!productAddedToCart) return // fixing typescript error
       if (productAddedToCart.quantity > 1) {
         productAddedToCart.quantity--
       } else {
@@ -47,7 +48,7 @@ export const useCartStore = defineStore('cart', {
       this.isDrawerOpen = !this.isDrawerOpen
       this.status = 'empty'
     },
-    formatPrice(price) {
+    formatPrice(price: number) {
       return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price)
     }
   },

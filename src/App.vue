@@ -53,7 +53,7 @@ const cartMessage = computed(() => {
           <div class="font-bold text-sm">
             Total: {{ cartStore.formatPrice(cartStore.calculateTotalAmount) }}
           </div>
-          <button class="btn btn-primary btn-xs" @click="cartStore.finishOrder(cartStore.cart)">
+          <button class="btn btn-primary btn-xs" @click="cartStore.finishOrder()">
             Finish Order
           </button>
           <button class="btn btn-error btn-circle btn-xs" @click="cartStore.cancelOrder">X</button>
