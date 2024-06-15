@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import type { Product, Purchase } from '@/models'
+import router from '../router/index'
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
@@ -37,11 +38,12 @@ export const useCartStore = defineStore('cart', {
       this.purchases.push(this.cart)
       this.cart = []
       this.status = 'finish'
+      router.replace('/purchases')
     },
 
-    cancelOrder() {
+    clearCart() {
       this.cart = []
-      this.status = 'cancel'
+      this.status = 'empty'
     },
 
     drawerToggle() {
