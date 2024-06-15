@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { XMarkIcon } from '@heroicons/vue/24/solid'
 import { RouterView } from 'vue-router'
 import ShoppingCart from '@/components/ShoppingCart.vue'
 import PurpleHeader from '@/components/PurpleHeader.vue'
@@ -11,8 +10,6 @@ const cartMessage = computed(() => {
   if (cartStore.cart.length === 0) {
     if (cartStore.status === 'empty') {
       return 'The cart is empty!'
-    } else if (cartStore.status === 'cancel') {
-      return 'Your order was canceled!'
     } else if (cartStore.status === 'finish') {
       return 'Purchase made!'
     }
@@ -30,18 +27,17 @@ const cartMessage = computed(() => {
 
       <RouterView class="relative z-10" />
     </div>
-    <div class="drawer-side z-30">
+    <div class="drawer-side" :class="{ 'z-30': cartStore.isDrawerOpen }">
       <label for="cart" aria-label="close sidebar" class="drawer-overlay"></label>
       <div
         class="menu p-0 w-80 min-h-full max-h-full overflow-y-auto bg-base-200 text-base-content flex-nowrap"
       >
-        <label
-          for="cart"
-          class="drawer-button btn absolute right-0"
+        <div
+          class="drawer-button btn absolute right-0 text-lg btn-sm"
           @click="cartStore.drawerToggle"
         >
-          <XMarkIcon class="w-7" />
-        </label>
+          X
+        </div>
         <div class="mt-8 p-2"><ShoppingCart /></div>
         <div class="text-xl text-center font-bold">
           {{ cartMessage }}
@@ -56,7 +52,7 @@ const cartMessage = computed(() => {
           <button class="btn btn-primary btn-xs" @click="cartStore.finishOrder()">
             Finish Order
           </button>
-          <button class="btn btn-error btn-circle btn-xs" @click="cartStore.cancelOrder">X</button>
+          <button class="btn btn-error btn-xs" @click="cartStore.clearCart">Clear Cart</button>
         </div>
       </div>
     </div>

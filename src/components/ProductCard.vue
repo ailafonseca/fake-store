@@ -11,10 +11,12 @@ const cartStore = useCartStore()
       <img :src="product?.image" class="md:w-28 md:h-32 md:m-3 w-18 h-32 m-2" />
     </div>
     <div class="text-center card-body font-mono">
-      <div class="card-title text-indigo-600 line-clamp-1 md:line-clamp-2">
+      <div class="card-title text-indigo-600 line-clamp-1 md:line-clamp-2 text-sm md:text-lg">
         {{ product?.title }}
       </div>
-      <div class="text-indigo-950 line-clamp-2 md:line-clamp-3">{{ product?.description }}</div>
+      <div class="text-indigo-950 line-clamp-2 md:line-clamp-3 text-xs md:text-sm">
+        {{ product?.description }}
+      </div>
 
       <div class="card-actions justify-between items-center mt-5">
         <div class="text-indigo-700 font-bold">{{ cartStore.formatPrice(product?.price) }}</div>
