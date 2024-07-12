@@ -5,6 +5,7 @@ export type Product = {
   description: string
   image: string
   quantity: number
+  rating: number
 }
 export type Purchase = {
   id: number
@@ -12,4 +13,5 @@ export type Purchase = {
   price: number
   image: string
   quantity: number
+  rating: number
 }

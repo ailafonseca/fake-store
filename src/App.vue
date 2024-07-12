@@ -32,12 +32,16 @@ const cartMessage = computed(() => {
       <div
         class="menu p-0 w-80 min-h-full max-h-full overflow-y-auto bg-base-200 text-base-content flex-nowrap"
       >
-        <div
-          class="drawer-button btn absolute right-0 text-lg btn-sm"
-          @click="cartStore.drawerToggle"
-        >
-          X
+        <div>
+          <button class="btn btn-error btn-xs m-1" @click="cartStore.clearCart">Clear Cart</button>
+          <div
+            class="drawer-button btn absolute right-0 text-lg btn-sm"
+            @click="cartStore.drawerToggle"
+          >
+            X
+          </div>
         </div>
+
         <div class="mt-8 p-2"><ShoppingCart /></div>
         <div class="text-xl text-center font-bold">
           {{ cartMessage }}
@@ -52,7 +56,6 @@ const cartMessage = computed(() => {
           <button class="btn btn-primary btn-xs" @click="cartStore.finishOrder()">
             Finish Order
           </button>
-          <button class="btn btn-error btn-xs" @click="cartStore.clearCart">Clear Cart</button>
         </div>
       </div>
     </div>
