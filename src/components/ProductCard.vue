@@ -12,36 +12,21 @@ const openModal = () => {
 </script>
 
 <template>
-  <div
-    class="card card-compact bg-base-100 shadow-xl m-1 md:m-3 overflow-hidden md:flex-col flex-row"
-  >
-    <div class="flex justify-center items-center w-auto">
-      <img :src="product?.image" class="md:w-28 md:h-32 md:m-3 h-20 w-20 m-5" />
+  <div class="card card-compact bg-base-100 shadow-xl m-1 md:m-3 md:flex-col flex-row">
+    <div class="flex justify-center items-center min-w-40">
+      <img :src="product?.image" class="md:w-28 md:h-32 md:m-3 h-24 w-28 m-5" />
     </div>
-    <div class="card-body font-mono">
-      <div class="text-indigo-600 font-bold line-clamp-1 md:line-clamp-2 text-xs md:text-lg">
+
+    <div class="card-body font-mono justify-between">
+      <div class="text-indigo-600 font-bold line-clamp-1 text-xs md:text-lg">
         {{ product?.title }}
       </div>
-      <div class="text-indigo-950 line-clamp-1 md:line-clamp-3 text-xs md:text-sm">
+      <div class="text-indigo-950 md:line-clamp-3 text-xs md:text-sm hide-description">
         {{ product?.description }}
       </div>
-      <!--tirar descrição no mobile-->
+      <div class="font-bold text-indigo-600">{{ cartStore.formatPrice(product?.price) }}</div>
 
-      <div class="card-actions md:justify-between items-center">
-        <div class="text-indigo-700 font-bold text-xs">
-          {{ cartStore.formatPrice(product?.price) }}
-        </div>
-
-        <button
-          class="btn btn-primary btn-xs"
-          @click="
-            () => {
-              cartStore.addCart(product)
-            }
-          "
-        >
-          Add to Cart
-        </button>
+      <div class="flex flex-row justify-center space-x-4">
         <label for="my_modal_6" class="btn btn-xs" @click="openModal">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +43,17 @@ const openModal = () => {
             />
           </svg>
         </label>
+
+        <button
+          class="btn btn-primary btn-xs"
+          @click="
+            () => {
+              cartStore.addCart(product)
+            }
+          "
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   </div>
@@ -68,7 +64,7 @@ const openModal = () => {
   display: block;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .hide-description {
     display: none;
   }
