@@ -18,15 +18,26 @@ const openModal = () => {
     </div>
 
     <div class="card-body font-mono justify-between">
-      <div class="text-indigo-600 font-bold line-clamp-1 text-xs md:text-lg">
+      <div class="text-indigo-600 font-bold lg:line-clamp-1 line-clamp-2 text-xs md:text-lg">
         {{ product?.title }}
       </div>
       <div class="text-indigo-950 md:line-clamp-3 text-xs md:text-sm hide-description">
         {{ product?.description }}
       </div>
-      <div class="font-bold text-indigo-600">{{ cartStore.formatPrice(product?.price) }}</div>
+      <div class="flex md:justify-center md:space-x-4 justify-start space-x-4">
+        <div class="font-bold text-indigo-600">
+          {{ cartStore.formatPrice(product?.price) }}
+        </div>
+        <div class="rating rating-xs">
+          <input type="radio" name="rating-1" class="mask mask-star bg-orange-600" />
+          <input type="radio" name="rating-1" class="mask mask-star bg-orange-600" />
+          <input type="radio" name="rating-1" class="mask mask-star" />
+          <input type="radio" name="rating-1" class="mask mask-star" />
+          <input type="radio" name="rating-1" class="mask mask-star" />
+        </div>
+      </div>
 
-      <div class="flex flex-row justify-center space-x-4">
+      <div class="flex md:justify-between justify-start space-x-4">
         <label for="my_modal_6" class="btn btn-xs" @click="openModal">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -60,10 +71,6 @@ const openModal = () => {
 </template>
 
 <style scoped>
-.product-description {
-  display: block;
-}
-
 @media (max-width: 767px) {
   .hide-description {
     display: none;
