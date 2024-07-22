@@ -16,7 +16,9 @@ const cartStore = useCartStore()
               :src="purchaseProduct?.image"
               class="md:w-36 md:h-40 md:m-3 w-28 h-32 m-2 flex items-center"
             />
-            <h2 class="card-title line-clamp-1 md:line-clamp-2">{{ purchaseProduct?.title }}</h2>
+            <h2 class="card-title line-clamp-1 md:line-clamp-2">
+              {{ purchaseProduct?.title }}
+            </h2>
             <p class="text-indigo-700 font-bold">
               {{ cartStore.formatPrice(purchaseProduct?.price) }} x
               {{ purchaseProduct?.quantity }} =
