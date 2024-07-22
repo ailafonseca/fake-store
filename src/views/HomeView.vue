@@ -37,11 +37,11 @@ const showModal = (product: Product) => {
   <div class="mt-16 bg-purple-300 p-4">
     <label class="input input-bordered flex items-center gap-2">
       <input type="text" class="grow" v-model="searchText" placeholder="Search" />
-      <MagnifyingGlassIcon class="w-5" />
+      <MagnifyingGlassIcon class="md:w-5 w-3" />
     </label>
   </div>
 
-  <div class="bg-purple-100 grid grid-cols sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-5">
+  <div class="bg-purple-100 grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-5">
     <ProductCard
       v-for="(product, i) in filteredProducts"
       v-bind:key="i"
