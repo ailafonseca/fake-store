@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/cart'
 import { defineProps, defineEmits } from 'vue'
+
 const props = defineProps(['product'])
 const emit = defineEmits(['show-modal'])
 
@@ -8,6 +9,13 @@ const cartStore = useCartStore()
 
 const openModal = () => {
   emit('show-modal', props.product)
+}
+const getStarClasses = (index: number, rating: number) => {
+  if (index < Math.floor(rating) || (index < Math.ceil(rating) && rating % 1 > 0.5)) {
+    return 'mask mask-star bg-orange-600'
+  } else {
+    return 'mask mask-star bg-gray-400'
+  }
 }
 </script>
 
@@ -24,16 +32,19 @@ const openModal = () => {
       <div class="text-indigo-950 md:line-clamp-3 text-xs md:text-sm hide-description">
         {{ product?.description }}
       </div>
-      <div class="flex md:justify-center md:space-x-4 justify-start space-x-4">
+      <div class="flex md:justify-center items-center md:space-x-4 justify-start space-x-4">
         <div class="font-bold text-indigo-600">
           {{ cartStore.formatPrice(product?.price) }}
         </div>
         <div class="rating rating-xs">
-          <input type="radio" name="rating-1" class="mask mask-star bg-orange-600" />
-          <input type="radio" name="rating-1" class="mask mask-star bg-orange-600" />
-          <input type="radio" name="rating-1" class="mask mask-star" />
-          <input type="radio" name="rating-1" class="mask mask-star" />
-          <input type="radio" name="rating-1" class="mask mask-star" />
+          <input
+            v-for="index in 5"
+            :key="index"
+            type="radio"
+            name="rating-1"
+            :class="getStarClasses(index - 1, product?.rating.rate)"
+            disabled
+          />
         </div>
       </div>
 
