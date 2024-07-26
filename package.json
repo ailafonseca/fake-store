@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.18",
+    "@kalimahapps/vue-icons": "^1.7.1",
     "@vue-hero-icons/outline": "^1.7.2",
     "@vue-hero-icons/solid": "^1.7.2",
     "axios": "^1.6.0",
