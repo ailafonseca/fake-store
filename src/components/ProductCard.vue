@@ -12,10 +12,16 @@ const openModal = () => {
   emit('show-modal', props.product)
 }
 const getStarClasses = (index: number, rating: number) => {
-  if (index < Math.floor(rating) || (index < Math.ceil(rating) && rating % 1 > 0.5)) {
-    return 'mask mask-star bg-orange-600'
+  const fractionalPart = rating % 1
+  if (index < Math.floor(rating) || (index < Math.ceil(rating) && fractionalPart > 0.8)) {
+    return 'mask mask-star-2  bg-orange-600'
+  } else if (
+    index < Math.floor(rating) ||
+    (index < Math.ceil(rating) && fractionalPart > 0.4 && fractionalPart < 0.8)
+  ) {
+    return 'mask mask-star-2 mask-half-1 bg-orange-600'
   } else {
-    return 'mask mask-star bg-gray-400'
+    return 'mask mask-star-2'
   }
 }
 </script>
@@ -37,16 +43,16 @@ const getStarClasses = (index: number, rating: number) => {
         <div class="font-bold text-indigo-600">
           {{ cartStore.formatPrice(product?.price) }}
         </div>
-        <div class="rating rating-xs">
+        <div class="rating rating-md rating-half">
           <input
             v-for="index in 5"
             :key="index"
             type="radio"
-            name="rating-1"
             :class="getStarClasses(index - 1, product?.rating.rate)"
             disabled
           />
         </div>
+        <div>{{ product?.rating.rate }}</div>
       </div>
 
       <div class="flex md:justify-between justify-start space-x-4">
