@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/cart'
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import { CaSearchAdvanced } from '@kalimahapps/vue-icons'
 
 const props = defineProps(['product'])
@@ -11,19 +11,24 @@ const cartStore = useCartStore()
 const openModal = () => {
   emit('show-modal', props.product)
 }
-const getStarClasses = (index: number, rating: number) => {
-  const fractionalPart = rating % 1
-  if (index < Math.floor(rating) || (index < Math.ceil(rating) && fractionalPart > 0.8)) {
-    return 'mask mask-star-2  bg-orange-600'
-  } else if (
-    index < Math.floor(rating) ||
-    (index < Math.ceil(rating) && fractionalPart > 0.4 && fractionalPart < 0.8)
-  ) {
-    return 'mask mask-star-2 mask-half-1 bg-orange-600'
+
+const checkedStars = computed(() => {
+  if (!props.product?.rating?.rate) return 0
+
+  let rate = props.product?.rating?.rate
+  let fractionalPart = rate % 1
+  let roundedRate
+
+  if (fractionalPart < 0.39) {
+    roundedRate = Math.floor(rate)
+  } else if (fractionalPart > 0.79) {
+    roundedRate = Math.ceil(rate)
   } else {
-    return 'mask mask-star-2'
+    roundedRate = Math.floor(rate) + 0.5
   }
-}
+
+  return roundedRate * 2
+})
 </script>
 
 <template>
@@ -43,16 +48,20 @@ const getStarClasses = (index: number, rating: number) => {
         <div class="font-bold text-indigo-600">
           {{ cartStore.formatPrice(product?.price) }}
         </div>
-        <div class="rating rating-md rating-half">
+        <div class="rating rating-sm rating-half">
           <input
-            v-for="index in 5"
-            :key="index"
+            v-for="i in 10"
+            :id="'star' + i"
+            :key="i"
             type="radio"
-            :class="getStarClasses(index - 1, product?.rating.rate)"
+            :name="'rating-' + product.id"
+            class="mask mask-star-2 bg-orange-600"
+            :class="i % 2 ? 'mask-half-1' : 'mask-half-2'"
+            :checked="checkedStars === i"
             disabled
           />
         </div>
-        <div>{{ product?.rating.rate }}</div>
+        <div>{{ props.product?.rating?.rate }}</div>
       </div>
 
       <div class="flex md:justify-between justify-start space-x-4">
