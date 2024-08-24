@@ -51,7 +51,6 @@ const checkedStars = computed(() => {
         <div class="rating rating-sm rating-half">
           <input
             v-for="i in 10"
-            :id="'star' + i"
             :key="i"
             type="radio"
             :name="'rating-' + product.id"
