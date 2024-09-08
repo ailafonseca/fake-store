@@ -41,7 +41,7 @@ const showModal = (product: Product) => {
     </label>
   </div>
 
-  <div class="bg-purple-100 grid sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-5">
+  <div class="bg-purple-100 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5">
     <ProductCard
       v-for="(product, i) in filteredProducts"
       v-bind:key="i"
