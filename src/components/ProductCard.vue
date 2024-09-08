@@ -60,7 +60,7 @@ const checkedStars = computed(() => {
             disabled
           />
         </div>
-        <div>{{ props.product?.rating?.rate }}</div>
+        <!-- <div>{{ props.product?.rating?.rate }}</div>-->
       </div>
 
       <div class="flex md:justify-between justify-start space-x-4">

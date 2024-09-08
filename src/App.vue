@@ -22,7 +22,7 @@ const cartMessage = computed(() => {
 <template>
   <div class="drawer drawer-start h-screen">
     <input id="cart" type="checkbox" class="drawer-toggle" v-model="cartStore.isDrawerOpen" />
-    <div class="drawer-content min-w-96">
+    <div class="drawer-content">
       <PurpleHeader class="fixed top-0 right-0 left-0 z-20" />
 
       <RouterView class="relative z-10" />
