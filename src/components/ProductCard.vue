@@ -92,6 +92,8 @@ const checkedStars = computed(() => {
   }
 }
 .card-body {
-  padding-top: 0rem;
+  @media (min-width: 767px) {
+    padding-top: 0rem;
+  }
 }
 </style>
