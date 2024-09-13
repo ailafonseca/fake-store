@@ -38,10 +38,12 @@ const checkedStars = computed(() => {
     </div>
 
     <div class="card-body font-mono justify-between">
-      <div class="text-indigo-600 font-bold lg:line-clamp-1 line-clamp-2 text-xs md:text-lg">
+      <div
+        class="text-indigo-600 font-bold lg:line-clamp-1 line-clamp-2 text-xs md:text-md md:text-center p-0"
+      >
         {{ product?.title }}
       </div>
-      <div class="text-indigo-950 md:line-clamp-3 text-xs md:text-sm hide-description">
+      <div class="text-indigo-950 md:line-clamp-3 text-xs md:text-sm hide-description text-center">
         {{ product?.description }}
       </div>
       <div class="flex md:justify-center items-center md:space-x-4 justify-start space-x-4">
@@ -88,5 +90,8 @@ const checkedStars = computed(() => {
   .hide-description {
     display: none;
   }
+}
+.card-body {
+  padding-top: 0rem;
 }
 </style>
