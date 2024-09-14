@@ -7,8 +7,24 @@ const cartStore = useCartStore()
 </script>
 
 <template>
-  <div class="card card-compact bg-base-100 shadow-xl m-1 md:m-3">
-    <div class="grid justify-items-end">
+  <div class="card card-compact bg-base-100 shadow-xl m-1 md:m-3 flex-row">
+    <div class="flex justify-center items-center min-w-20 ml-5">
+      <img :src="cartProduct?.image" class="h-20 w-24" />
+    </div>
+
+    <div class="card-body font-mono text-center">
+      <div class="card-title text-indigo-600 line-clamp-2 text-sm ml-2">
+        {{ cartProduct?.title }}
+      </div>
+
+      <div class="flex-col card-actions items-center mt-5 leading-3">
+        <div class="text-indigo-700 font-bold">
+          {{ cartStore.formatPrice(cartProduct?.price) }}
+        </div>
+        <div class="qty-size">(Qty: {{ cartProduct?.quantity }})</div>
+      </div>
+    </div>
+    <div>
       <button
         @click="
           () => {
@@ -19,20 +35,11 @@ const cartStore = useCartStore()
         <XCircleIcon class="w-7 text-red-700" />
       </button>
     </div>
-    <div class="flex justify-center items-center w-auto">
-      <img :src="cartProduct?.image" class="md:w-28 md:h-32 md:m-3 w-18 h-32 m-2" />
-    </div>
-    <div class="text-center card-body font-mono">
-      <div class="card-title text-indigo-600 line-clamp-1 md:line-clamp-2">
-        {{ cartProduct?.title }}
-      </div>
-
-      <div class="card-actions justify-between items-center mt-5">
-        <div class="text-indigo-700 font-bold">
-          {{ cartStore.formatPrice(cartProduct?.price) }}
-        </div>
-        <div>Qty: {{ cartProduct?.quantity }}</div>
-      </div>
-    </div>
   </div>
 </template>
+
+<style>
+.qty-size {
+  font-size: 9px;
+}
+</style>
