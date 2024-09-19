@@ -39,18 +39,18 @@ const checkedStars = computed(() => {
 
     <div class="card-body font-mono justify-between">
       <div
-        class="text-indigo-600 font-bold lg:line-clamp-1 line-clamp-2 text-xs md:text-md md:text-center p-0"
+        class="text-indigo-700 font-bold lg:line-clamp-1 line-clamp-2 text-xs md:text-md md:text-center p-0"
       >
         {{ product?.title }}
       </div>
-      <div class="text-indigo-950 md:line-clamp-3 text-xs md:text-sm hide-description text-center">
+      <div class="text-indigo-950 md:line-clamp-3 hide-description text-center">
         {{ product?.description }}
       </div>
-      <div class="flex md:justify-center items-center md:space-x-4 justify-start space-x-4">
-        <div class="font-bold text-indigo-600">
+      <div class="flex md:flex-row md:space-x-4 md:justify-center md:items-center flex-col">
+        <div class="font-bold text-purple-700 price-size">
           {{ cartStore.formatPrice(product?.price) }}
         </div>
-        <div class="rating rating-sm rating-half">
+        <div class="rating rating-xs md:rating-sm rating-half desktop-margin md:mt-0 mt-1">
           <input
             v-for="i in 10"
             :key="i"
@@ -91,9 +91,17 @@ const checkedStars = computed(() => {
     display: none;
   }
 }
-.card-body {
-  @media (min-width: 767px) {
+
+@media (min-width: 767px) {
+  .card-body {
     padding-top: 0rem;
   }
+  .desktop-margin {
+    margin-bottom: 0.35rem;
+  }
+}
+
+.price-size {
+  font-size: 17.5px;
 }
 </style>
