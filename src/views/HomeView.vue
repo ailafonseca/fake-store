@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ProductCard from '@/components/ProductCard.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import type { Product } from '@/models'
@@ -8,15 +8,22 @@ import type { Product } from '@/models'
 const products = ref<Product[]>([])
 const searchText = ref('')
 const selectedProduct = ref<Product | null>(null)
+const isLoading = ref(true)
 
-axios
-  .get('https://fakestoreapi.com/products/')
-  .then((res) => {
+const fetchProducts = async () => {
+  try {
+    const res = await axios.get('https://fakestoreapi.com/products/')
     products.value = res.data
-  })
-  .catch((err) => {
+  } catch (err) {
     console.log(err)
-  })
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  fetchProducts()
+})
 
 const filteredProducts = computed(() => {
   if (!searchText.value) {
@@ -34,7 +41,11 @@ const showModal = (product: Product) => {
 </script>
 
 <template>
-  <div class="mt-16 bg-purple-300 p-4">
+  <div v-if="isLoading" class="flex justify-center items-center h-96">
+    <div class="loading loading-spinner text-primary loading-lg"></div>
+  </div>
+
+  <div v-else class="mt-16 bg-purple-300 p-4">
     <label class="input input-bordered flex items-center gap-2">
       <input type="text" class="grow" v-model="searchText" placeholder="Search" />
       <MagnifyingGlassIcon class="md:w-5 w-3" />
@@ -69,10 +80,7 @@ const showModal = (product: Product) => {
       </div>
 
       <div class="modal-action">
-        <label
-          for="my_modal_6"
-          class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          @click=""
+        <label for="my_modal_6" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
           >x</label
         >
       </div>
