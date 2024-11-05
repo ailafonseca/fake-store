@@ -2,6 +2,8 @@
 import { useCartStore } from '@/stores/cart'
 import { defineProps, defineEmits, computed } from 'vue'
 import { CaSearchAdvanced } from '@kalimahapps/vue-icons'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 const props = defineProps(['product'])
 const emit = defineEmits(['show-modal'])
@@ -29,6 +31,12 @@ const checkedStars = computed(() => {
 
   return roundedRate * 2
 })
+
+const AddedNotification = () => {
+  toast.success('The product was added to the cart!', {
+    autoClose: 1000
+  })
+}
 </script>
 
 <template>
@@ -74,6 +82,7 @@ const checkedStars = computed(() => {
           class="btn btn-primary btn-xs"
           @click="
             () => {
+              AddedNotification()
               cartStore.addCart(product)
             }
           "
